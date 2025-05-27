@@ -23,7 +23,11 @@ class ProductCatalogServiceProvider extends PackageServiceProvider
             ->hasRoutes('web')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_products_table')
+            ->hasMigrations([
+                    'create_products_table',
+                    'create_product_categories_table',
+                    'create_category_product_table'
+                ])
             ->hasCommand(ProductCatalogCommand::class);
     }
 
@@ -32,6 +36,7 @@ class ProductCatalogServiceProvider extends PackageServiceProvider
         // Publish JS/Vue resources to the main app
         $this->publishes([
             __DIR__ . '/../resources/js/admin/product/' => resource_path('js/admin/product'),
+            __DIR__ . '/../resources/js/admin/product-category/' => resource_path('js/admin/product-category'),
         ], 'product-catalog-assets');
     }
 }

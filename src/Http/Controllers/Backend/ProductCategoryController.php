@@ -1,6 +1,6 @@
 <?php
 
-namespace AcitJazz\ProductCatalog\Http\Controllers;
+namespace AcitJazz\ProductCatalog\Http\Controllers\Backend;
 
 use AcitJazz\ProductCatalog\Http\Requests\ProductCategoryRequest;
 use Illuminate\Routing\Controller;
@@ -20,12 +20,9 @@ class ProductCategoryController extends Controller
 
         return Inertia::render('product-category/index', [
             'product_categories' => ProductCategoryResource::collection($product_categories),
-            'type' => type(),
-            // 'tags' => $tags,
             'title' => request('trash') ? 'Trash' : 'Product Category',
-            'locale' => app()->getLocale(),
             'trash' => request('trash') ? true : false,
-            'search_title' => request('search_title'),
+            'request' => request()->all(),
             'breadcumb' => [
                 [
                     'text' => 'Dashboard',

@@ -1,6 +1,6 @@
 <?php
 
-namespace AcitJazz\ProductCatalog\Http\Controllers;
+namespace AcitJazz\ProductCatalog\Http\Controllers\Backend;
 
 use AcitJazz\ProductCatalog\Http\Requests\ProductRequest;
 use Illuminate\Routing\Controller;
@@ -23,12 +23,9 @@ class ProductController extends Controller
 
         return Inertia::render('product/index', [
             'products' => FeProductResource::collection($products),
-            'type' => type(),
-            // 'tags' => $tags,
             'title' => request('trash') ? 'Trash' : 'Product',
-            'locale' => app()->getLocale(),
             'trash' => request('trash') ? true : false,
-            'search_title' => request('search_title'),
+            'request' => request()->all(),
             'breadcumb' => [
                 [
                     'text' => 'Dashboard',

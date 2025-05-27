@@ -6,19 +6,25 @@ import {router } from '@inertiajs/vue3';
 const props  = defineProps({
     product_categories: Object,
     title:String,
-    search_title:String,
+    request:Object,
     is_admin:Boolean,
     trash:Boolean,
 });
-const params = ref({
-    search_title:'',
+const params = ref({ ...props.request,
+    search_title : '',
 })
 const filter = () => {
     const endpoint = ref(useBuildQuery(route('product-category.index'),params.value));
     router.get(endpoint.value);
 }
+const sortBy = (field) => {
+  params.value.sort = params.value.sort === 'desc' ? 'asc' : 'desc';
+  params.value.sort_by = field;
+  filter();
+}
 </script>
 <template>
+    <Head :title="title" />
     <AppLayout>
        <div class="flex flex-wrap mt-4">
          <div class="w-full mb-12 px-4">
@@ -52,8 +58,16 @@ const filter = () => {
                 <table class="items-center w-full bg-transparent border-collapse">
                     <thead>
                     <tr class="hidden lg:table-row">
-                        <Th>Title</Th>
-                        <Th>Published Date</Th>
+                        <Th>Title 
+                            <button class="ml-2 hover:text-primary"  @click="sortBy('title')">
+                            <i class="fa fa-sort"></i>
+                            </button>
+                        </Th>
+                        <Th>Published Date
+                            <button class="ml-2 hover:text-primary"  @click="sortBy('published_at')">
+                            <i class="fa fa-sort"></i>
+                            </button>
+                        </Th>
                         <Th></Th>
                     </tr>
                     </thead>

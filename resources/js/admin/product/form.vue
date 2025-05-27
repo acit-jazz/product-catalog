@@ -7,6 +7,7 @@ let props = defineProps({
   type: [String, Boolean],
   method: String,
   categories: Array,
+  title:String,
   is_admin:Boolean,
 });
 
@@ -43,7 +44,7 @@ const changeTab = (newtab) => {
 </script>
 
 <template>
-    <Head title="Content" />
+    <Head :title="title" />
     <AppLayout>
         <div>
           <form class="flex flex-wrap mt-4 " @submit.prevent="default">
@@ -87,7 +88,7 @@ const changeTab = (newtab) => {
                                 <InputLabel :for="form.summary" value="Summary" />
                                 <TextAreaInput  class="mt-1 block w-full" v-model="form.summary"  />
                             </div>
-                            <div class="block mt-4" v-if="form.template == 'full-content' || form.template == 'biography'">
+                            <div class="block mt-4">
                                 <InputLabel for="description" value="Description" />
                                 <tiny-editor
                                 placeholder="Description"
