@@ -24,19 +24,6 @@ or
 php artisan migrate --path=vendor/acitjazz/product-catalog/database/migrations
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="product-catalog-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
 Publish the Inertia Views
 
 ```bash
